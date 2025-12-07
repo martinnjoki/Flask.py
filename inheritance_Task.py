@@ -24,13 +24,8 @@ class teacher(Person):
         super().display_info()
         print(f"SUBJECT: {self.subject}, SALARY: {self.salary}")
 Student1 = student("Martin Mbungu", 34, "DHR094", "Health Records& IT")
-print(Student1.name)
-print(Student1.age)
-print(Student1.student_id)
-print(Student1.course)
+Student1.display_info()
+
 Teacher1 = teacher("Pauline Waithera", 45, "Health Information System", 76000) 
-print(Teacher1.name)
-print(Teacher1.age)
-print(Teacher1.subject)
-print(Teacher1.salary)        
+Teacher1.display_info()
 
