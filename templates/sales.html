@@ -2,12 +2,34 @@
 {% block title %} sales {% endblock %}
 {% block content %}
 <div>
-<div>
-<p>This is Sales Page</p>
-    
-</div>
+    <div>
+        <p>This is Sales Page</p>
 
+    </div>
+    <div>
+        <table id="example" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sale ID</th>
+                    <th>Product Id</th>
+                    <th>Quantity</th>
+                    <th>Created At</th>
 
-</div>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sales in sales %}
+                <tr>
+                    <td>{{sales[0]}}</td>
+                    <td>{{sales[1]}}</td>
+                    <td>{{sales[2]}}</td>
+                    <td>{{sales[3]}}</td>
 
-{% endblock %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    {% endblock %}
