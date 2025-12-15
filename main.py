@@ -10,7 +10,7 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@pp.route("/stock")
+@app.route("/stock")
 def fetch_stock():
     stock = get_stock()
     return render_template("stock.html", stock=stock)
