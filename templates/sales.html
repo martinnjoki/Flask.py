@@ -3,9 +3,62 @@
 {% block content %}
 <div>
     <div>
-        <p>This is Sales Page</p>
-
+        <p>These is the sales page</p>
     </div>
+
+    <div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Add sales
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Adding sales</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <form action="/add_sales" method="post">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Sales Id</label>
+                                    <input type="number" name="sales_id" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                                <div class="form-floating">
+                                    <select class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example">
+                                        <option selected>Select Products</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="floatingSelect">Works with selects</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Quantity</label>
+                                    <input type="number" name="quantity" class="form-control"
+                                        id="exampleInputPassword1">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add sales</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div>
         <table id="example" class="table table-striped">
             <thead>
@@ -18,18 +71,24 @@
                 </tr>
             </thead>
             <tbody>
-                {% for sales in sales %}
+                {% for sale in sales %}
                 <tr>
-                    <td>{{sales[0]}}</td>
-                    <td>{{sales[1]}}</td>
-                    <td>{{sales[2]}}</td>
-                    <td>{{sales[3]}}</td>
+                    <td>{{sale[0]}}</td>
+                    <td>{{sale[1]}}</td>
+                    <td>{{sale[2]}}</td>
+                    <td>{{sale[3]}}</td>
 
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
     </div>
 
-    {% endblock %}
+
+</div>
+
+
+
+
+
+{% endblock %}
