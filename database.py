@@ -19,8 +19,6 @@ def get_stock():
     cur.execute("SELECT * FROM stock")
     stock = cur.fetchall()
     return stock
-stock = get_stock()
-print(stock)
 
 
 def insert_products(values):
@@ -54,11 +52,11 @@ def insert_stock(values):
     cur.execute("")    
 
 def available_stock(pid):
-    cur.execute(f'SELECT sum (stock_quantity) FROM sales WHERE pid = {pid}')
-    total_stock = cur.fetchone() [0] or 0
+    cur.execute(f'SELECT sum(stock_quantity) FROM stock WHERE pid = {pid}')
+    total_stock = cur.fetchone()[0] or 0
 
     cur.execute(f'SELECT sum (quantity) FROM sales WHERE pid = {pid}')
-    total_sales = cur.fetchone() [0] or 0
+    total_sales = cur.fetchone()[0] or 0
 
     return total_stock - total_sales 
 
