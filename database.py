@@ -13,6 +13,8 @@ def get_products():
 products = get_products()
 print(products)
 
+
+
 def get_stock():
     cur.execute("SELECT * FROM stock")
     stock = cur.fetchall()
@@ -26,13 +28,15 @@ def insert_products(values):
     conn.commit()
 
    
-
-
-
 def get_sales():
     cur.execute("select * from sales")
     sales = cur.fetchall()
     return sales
+
+def get_users():
+    cur.execute("SELECT * FROM users")
+    users = cur.fetchall()
+    return users
 
 
 #method 1 - f-string
@@ -49,7 +53,7 @@ def insert_sales_2(values):
 def insert_stock(values):
     cur.execute("")    
 
-def available_stocks(pid):
+def available_stock(pid):
     cur.execute(f'SELECT sum (stock_quantity) FROM sales WHERE pid = {pid}')
     total_stock = cur.fetchone() [0] or 0
 
@@ -60,7 +64,11 @@ def available_stocks(pid):
 
 def insert_stock(values):
     cur.execute(f"insert into stock (pid, stock_quantity) values{values}")
-    conn.commit()  
+    conn.commit() 
+
+def insert_users(values):
+    cur.execute(f"insert into users (full_name, email, phone_number, password) values{values}") 
+    conn.commit()    
 
 
 

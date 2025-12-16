@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} sales {% endblock %}
+{% block title %} sale {% endblock %}
 {% block content %}
 <div>
     <div>
-        <p>These is the sales page</p>
+        <p>These is the sale page</p>
     </div>
 
     <div>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Add sales
+            Make sale
         </button>
 
         <!-- Modal -->
@@ -18,38 +18,35 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Adding sales</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Making a sale</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="modal-body">
                             <form action="/add_sales" method="post">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Sales Id</label>
-                                    <input type="number" name="sales_id" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <select class="form-select" name="pid" aria-label="Default select example">
+                                        <option selected>Select Product</option>
+                                        {% for product in products %}
+                                        <option value="{{product[0]}}">{{product[1]}}</option>
+                                        {% endfor %}
 
-                                </div>
-                                <div class="form-floating">
-                                    <select class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
-                                        <option selected>Select Products</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
                                     </select>
-                                    <label for="floatingSelect">Works with selects</label>
                                 </div>
+
+
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Quantity</label>
                                     <input type="number" name="quantity" class="form-control"
                                         id="exampleInputPassword1">
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Add sales</button>
+                                    <button type="submit" class="btn btn-primary">Make Sale</button>
                                 </div>
+
                             </form>
                         </div>
                     </div>
