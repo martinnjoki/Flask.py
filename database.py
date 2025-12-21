@@ -47,9 +47,8 @@ def insert_sales(values):
 def insert_sales_2(values):
     cur.execute("insert into sales(pid,quantity)values(%s,%s)",values)
     conn.commit()
-
-def insert_stock(values):
-    cur.execute("")    
+    
+     
 
 def available_stock(pid):
     cur.execute(f'SELECT sum(stock_quantity) FROM stock WHERE pid = {pid}')
@@ -66,7 +65,57 @@ def insert_stock(values):
 
 def insert_users(values):
     cur.execute(f"insert into users (full_name, email, phone_number, password) values{values}") 
-    conn.commit()    
+    conn.commit()  
+
+def check_user_exists(email):
+    cur.execute("SELECT * FROM users WHERE email = %s ", (email,)) 
+    user = cur.fetchone()
+    return user
+#sales_per_product
+def sales_per_product():
+    cur.execute("""select products.name as p_name, sum(products.selling_price * sales.quantity)
+             as total_sales from products join sales on products.id = sales.pid group by(p_name)
+                """)
+    product_sales = cur.fetchall()
+    return product_sales 
+
+#sales per day
+
+def sales_per_day():
+    cur.execute("""select sales.created_at as date, sum(products.selling_price * sales.quantity)
+             as total_sales from products join sales on products.id = sales.pid group by(date)
+    """)
+    daily_sales = cur.fetchall()
+    return daily_sales
+
+#profit per day
+
+def profit_per_day():
+    cur.execute(""" 
+    select sales.created_at as date , sum((products.selling_price - products.buying_price) * sales.quantity)
+    as profit from products join sales on sales.pid = products.id group by(date)
+    """)
+    daily_profit = cur.fetchall()
+    return daily_profit
+
+#profit_per_product
+
+def profit_per_product():
+    cur.execute(""" 
+        select products.name as p_name , sum((products.selling_price - products.buying_price) * sales.quantity)
+            as profit from products join sales on sales.pid = products.id group by(p_name)
+    """)
+    product_profit = cur.fetchall()
+    return product_profit
+#
+x = profit_per_product()
+print(x)
+
+# [('LED Desk Lamp', Decimal('200.00')), ('Maize', Decimal('2000.00'))]
+
+
+
+
 
 
 

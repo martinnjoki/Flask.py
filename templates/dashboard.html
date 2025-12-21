@@ -3,11 +3,74 @@
 {% block content %}
 
 <div>
-<div>
-<p>This Is The Dashboard</p>
+    <div>
+        <p>This Is The Dashboard</p>
+
+        <div>
+            <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+        </div>
+        
+        <div>
+            <canvas id="line-chart" width="800" height="450"></canvas>
+        </div>
+
+    </div>
 
 </div>
+<script>
+    //Bar-Chart
+    new Chart(document.getElementById("bar-chart-grouped"), {
+        type: 'bar',
+        data: {
+            labels: {{product_names | safe}},
+            datasets: [
+                {
+                    label: "Sales",
+                    backgroundColor: "#3e95cd",
+                    data: {{sales_per_p | safe}}
+                }, {
+                    label: "Profit",
+                    backgroundColor: "#8e5ea2",
+                    data: {{profit_per_p | safe}}
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Sales And Profit'
+            }
+        }
+    });
 
-</div>
+// Linechart
+
+    new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: {{date | safe}},
+    datasets: [{ 
+        data: {{sales_per_d}},
+        label: "Sales",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: {{profit_per_d | safe}},
+        label: "Profit",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, 
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Sales and Profit Per Day (Ksh.)'
+    }
+  }
+});
+
+
+</script>
 
 {% endblock %}
